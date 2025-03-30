@@ -267,3 +267,53 @@ def stream(
                   + ':'.join(filter(None, [name, address])) + '...')
         print('\n*BlueMuse will auto connect and stream when the device is found. \n*You can also use the BlueMuse interface to manage your stream(s).')
         muse.start()
+
+
+def main():
+    """Command-line entry point for streaming."""
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description='Stream data from a Muse device.')
+    parser.add_argument('--address', dest='address', type=str, default=None,
+                      help='MAC address of the device')
+    parser.add_argument('--name', dest='name', type=str, default=None,
+                      help='Name of the device')
+    parser.add_argument('--backend', dest='backend', type=str, default='auto',
+                      help='BLE backend to use (auto, bluemuse, gatt, bgapi, bleak)')
+    parser.add_argument('--interface', dest='interface', type=str, default=None,
+                      help='The interface to use')
+    parser.add_argument('--ppg', action='store_true',
+                      help='Enable PPG streaming')
+    parser.add_argument('--acc', action='store_true',
+                      help='Enable accelerometer streaming')
+    parser.add_argument('--gyro', action='store_true',
+                      help='Enable gyroscope streaming')
+    parser.add_argument('--no-eeg', action='store_true',
+                      help='Disable EEG streaming')
+    parser.add_argument('--disable-light', action='store_true',
+                      help='Disable light on device')
+    
+    args = parser.parse_args()
+
+    if not args.address and not args.name:
+        # If no address or name is provided, list available Muses
+        print("No device address or name provided. Available Muse devices:")
+        list_muses(backend=args.backend)
+        return
+
+    # Start streaming
+    stream(
+        address=args.address,
+        name=args.name,
+        backend=args.backend,
+        interface=args.interface,
+        ppg_enabled=args.ppg,
+        acc_enabled=args.acc,
+        gyro_enabled=args.gyro,
+        eeg_disabled=args.no_eeg,
+        disable_light=args.disable_light
+    )
+
+if __name__ == '__main__':
+    main()

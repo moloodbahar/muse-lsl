@@ -1,6 +1,7 @@
 import argparse
 import sys
 from .cli import CLI
+from .stream import main
 
 
 def main():

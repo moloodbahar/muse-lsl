@@ -1,20 +1,52 @@
-*.pyc
-#*.csv
-.ipynb_checkpoints
+# Virtual Environment
+.env
+.venv
+env/
+venv/
+ENV/
 
-build/
-dist/
-*.egg-info/
-*.egg
-*.py[cod]
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
 *.so
-*~
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Data files
+*.csv
+*.xdf
+*.fif
+*.raw
+*.h5
+
+# OS
+.DS_Store
+Thumbs.db
 
 # due to using tox and pytest
 .tox
 .cache
 .vs
-env/
 
 muselsl/docs
